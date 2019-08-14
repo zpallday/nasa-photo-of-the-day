@@ -1,10 +1,5 @@
-import React from "react";
-import DayPickerInput from 'react-day-picker/DayPickerInput';
-
-
-
-
-
+import React from 'react';
+import DayCardInput from 'react-day-picker/DayPickerInput';
 
 function forDate(date) {
 const d = new Date(date),
@@ -19,12 +14,11 @@ return [year, month, day].join('-')
 
 }
 
-export default function DateCard({setState}) {
-        return (
-            <>
-           <h1>The universe:  </h1>
-            <p onDayChange={day => setState(forDate(day))} />
-      </>
-        )
-};
-      
+export default function DateCard({setDate}) {
+    return (
+        <div>
+          <h1>Show me the universe on:  </h1>
+          <DayCardInput onDayChange={day => setDate(forDate(day))} />
+        </div>
+      );
+    }
