@@ -1,39 +1,53 @@
-import React, { useState, useEffect} from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Photos from "./photos.js";
-import DateCard from "./DateCard.js";
+import Photo from "./photos";
+import DateCard from "./DateCard";
 
 
-function Cards() {
-const [image,setImg] = useState('');
-const [exp,setExp] = useState('');
-const [date, setDate] = useState('');
 
-useEffect(() => {
-    axios.get(`https://api.nasa.gov/planetary/apod?api_key=k6BJnakZKmfWOZtQ4sEgdxm95OhaylTctbC8bkvy"=${date}`)
 
-.then(res => {
-    console.log(res.data);
+
+function Card(){
+
+    const [img, setImg] = useState("");
+    const [exp, setExp] = useState("");
+    const [date, setDate] = useState("");
+    const [title, setTitle] = useState("");
     
-})
 
-.catch(error => {
-    console.log(error);
-});
-})
-
-return (
-<div className = "Card">
-    <p>
-        Nasa photos of the day: {date}
-    </p>
-    <DateCard setDate={setDate}/>
-    <Photos imgUrl = {image} />
-<p> {exp} </p>
-</div>
-
-)
-
+    useEffect(() => {
+        //request info from server and add useEffect to prevent rerendering
+        axios.get(`https://api.nasa.gov/planetary/apod?api_key=y54CZckTolqCojW2qsO0J497f2bsh3yFgzEjyKkf&date=${date}`)
+            .then(res => {
+                console.log(res.data);
+                const imgUrl = (res.data.hdurl);
+                console.log(imgUrl);
+                setImg(imgUrl);
+                const imgDescrip = (res.data.exp);
+                console.log(imgDescrip);
+                setExp(imgDescrip);
+                const title = (res.data.title);
+                setTitle(title);
+            })
+            .catch(error => {
+                console.log(error);
+        })
+    }, [date]);
+   
+    return (
+        <div>
+            <DateCard setDate={setDate}/>
+            <Photo imgUrl={img}/>
+            <div>
+                <h2> {title} </h2>
+                <h2> {exp} </h2>
+            </div>
+            <p>
+                <p> Data provided by the National Aeronautics and Space Administration.</p>
+            </p>
+        </div>
+        
+    )
 }
 
-export default Cards;
+export default Card;
