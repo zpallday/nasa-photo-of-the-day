@@ -1,8 +1,30 @@
 import React from "react";
 import DayPickerInput from 'react-day-picker/DayPickerInput';
+import 'react-day-picker/lib/style.css';
+import styled from "styled-components";
+
+
+const DayPicker = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 45%;
+  aligh-item:center;
+
+`
 
 
 
+const DateDiv = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 43%;
+  aligh-item:center;
+`
+  const MainTitle = styled.h1`
+    font-size: 2.5rem;
+    margin-right: 8px;
+
+`
 
 
 
@@ -20,10 +42,12 @@ function forDate(date) {
 
 export default function DatePicker({setDate}) {
     return (
-      <div>
-        <h1>Show me the universe on:  </h1>
+      <DateDiv>
+        <MainTitle>The Universe</MainTitle>
+        <DayPicker>
         <DayPickerInput onDayChange={day => setDate(forDate(day))} />
-      </div>
+        </DayPicker>
+      </DateDiv>
     );
 }
 
