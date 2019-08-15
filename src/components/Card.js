@@ -3,12 +3,18 @@ import axios from "axios";
 import NasaPhoto from "./photos";
 import DateCard from "./DateCard";
 import Styled from "styled-components";
+import Footer from "./Footer";
+// import { Flex } from "semantic-ui-react";
+
+ 
 
 
 const WrapperDiv = Styled.div`
-  color: #142834;
+  color: #000001;
   margin: 10px 30px 10px 30px;
   text-align: left;
+  background: #2AA276;
+  font-family: "Kaushan", cursive;
 `
 const BottomDiv = Styled.div`
     display: flex;
@@ -22,16 +28,15 @@ const Title = Styled.h2`
     font-size: 2.2rem;
 `
 const Descrip = Styled.p`
+    color: #0C0100;
     width: 75%;
     padding: 10px;
     margin: 5px;
     font-size: 1.5rem;
     border-left: solid 1px #ddab52;
+    font-family: "Courgette", cursive;
 `
-const Footer = Styled.p`
-    font-size: 1rem;
-    text-align: center;
-`
+
 
 function Card(){
 
@@ -54,6 +59,7 @@ function Card(){
                 setExplanation(imgDescrip);
                 const title = (response.data.title);
                 setTitle(title);
+
             })
             .catch(error => {
                 console.log(error);
@@ -61,18 +67,21 @@ function Card(){
     }, [date]);
    
     return (
+
+        
         <WrapperDiv>
+           
             <DateCard setDate={setDate}/>
             <NasaPhoto imgUrl={image}/>
             <BottomDiv>
                 <Title> {title} </Title>
                 <Descrip> {explanation} </Descrip>
             </BottomDiv>
-            <Footer>
-                <p> CopyRight 2018 All Right Reserved.</p>
-            </Footer>
+         
+                <Footer>   </Footer>
+                
         </WrapperDiv>
-        
+     
     )
 }
 
